@@ -143,7 +143,3 @@ gen
 .idea/inspectionProfiles/
 .idea/misc.xml
 .idea/modules.xml
-blog/
-blog_project/
-manage.py
-templates/
