@@ -1,1 +1,1 @@
-<h1>This is Simple Blog Website Based on Django Framework</h1>
+<h1>This is a Simple Blog Website Based on Django Framework</h1>
