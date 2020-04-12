@@ -5,7 +5,10 @@ from django.urls import reverse
 
 # Create your models here.
 class Post(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User',
+                               models.SET_NULL,
+                               blank=True,
+                               null=True, )
     title = models.CharField(max_length=200)
     text = models.TextField()
     create_date = models.DateTimeField(default=timezone.now())
@@ -30,7 +33,10 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='comments')  # *1: related_name: when in
+    post = models.ForeignKey('blog.Post',
+                             models.SET_NULL,
+                             blank=True,
+                             null=True, related_name='comments')  # *1: related_name: when in
     # the post class call comments, return all comments which their foreign key belongs to the post
     author = models.CharField(max_length=200)
     text = models.TextField()
