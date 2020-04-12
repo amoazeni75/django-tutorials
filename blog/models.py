@@ -11,7 +11,7 @@ class Post(models.Model):
                                null=True, )
     title = models.CharField(max_length=200)
     text = models.TextField()
-    create_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
@@ -40,7 +40,7 @@ class Comment(models.Model):
     # the post class call comments, return all comments which their foreign key belongs to the post
     author = models.CharField(max_length=200)
     text = models.TextField()
-    create_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
 
     def approve(self):
