@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from django.views.generic import (TemplateView, ListView,
                                   DetailView, CreateView,
-                                  UpdateView)
+                                  UpdateView, DeleteView)
 from blog.models import Post, Comment
 from django.utils import timezone
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from blog.forms import PostFrom
+
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -52,3 +54,8 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     redirect_field_name = 'blog/post_detail.html'
     form_class = PostFrom
     model = Post
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = reverse_lazy('post_list')
