@@ -1,2 +1,1 @@
-# simple-social-media
-A Django based web application that is look like a simple social media
+<h1>Simple Social Media Web Application</h1>
