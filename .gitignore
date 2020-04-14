@@ -1,0 +1,4 @@
+*.pyc
+.idea/vcs.xml
+*.xml
+.idea/simple_social_media.iml
