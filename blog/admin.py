@@ -7,6 +7,7 @@ from blog.models import Post, Comment
 class CommentAdmin(admin.ModelAdmin):
     fields = ['author', 'created_date', 'approved_comment', 'text', 'post']
     search_fields = ['author', 'text', 'post__title']  # add searching by tittle in the admin panel
+    list_filter = ['post']
 
 
 admin.site.register(Post)
