@@ -9,6 +9,7 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ['author', 'text', 'post__title']  # add searching by tittle in the admin panel
     list_filter = ['post']
     list_display = ['author', 'created_date', 'post']
+    list_editable = ['author']
 
 
 admin.site.register(Post)
