@@ -10,7 +10,7 @@ User = get_user_model()  # the user already logged in and active
 
 from django import template
 
-register = template.library()
+register = template.library
 
 
 class Group(models.Model):
