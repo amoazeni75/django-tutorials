@@ -8,4 +8,7 @@ class ArticleSerializer(serializers.Serializer):
     description = serializers.CharField()
     body = serializers.CharField()
     location = serializers.CharField()
-    pub
+    publication_date = serializers.DateField()
+    active = serializers.BooleanField()
+    created_at = serializers.DateTimeField(read_only=True)
+    updated_at = serializers.DateTimeField(read_only=True)
