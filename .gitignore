@@ -147,3 +147,4 @@ first-project/first_app/migrations/0001_initial.py
 first-project/first_app/migrations/0002_userprofileinfo.py
 first-project/first_app/migrations/__init__.py
 first-project/first_app/migrations/0003_school_student.py
+newsapi/news/migrations/__init__.py
