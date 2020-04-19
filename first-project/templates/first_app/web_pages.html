@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Web pages</title>
+</head>
+<body>
+<div>
+    {% if access_records %}
+        <table>
+            <thead>
+            <th>site name
+            <th>data accessed</th>
+            </thead>
+            {% for acc in access_records %}
+                <tr>
+                    <td>{{ acc.name }}</td>
+                    <td>{{ acc.date }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p> Noting found</p>
+    {% endif %}
+</div>
+</body>
+</html>

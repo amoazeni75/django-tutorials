@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container ">
+        <ul class="nav navbar-nav">
+            <li class="navbar-link"><a href="{% url 'first_app:register_web_pages' %}">Register webpage</a></li>
+            <li class="navbar-link"><a href="{% url 'first_app:register' %}">Register User</a></li>
+            <li class="navbar-link"><a href="{% url 'admin:index' %}">Admin</a></li>
+            <li class="navbar-link"><a href="{% url 'first_app:web_pages' %}">Webpage list</a></li>
+            <li class="navbar-link"><a href="{% url 'index' %}">Index</a></li>
+            {% if user.is_authenticated %}
+                <li class="navbar-link"><a href="{% url 'logout' %}">logout</a></li>
+            {% else %}
+                <li class="navbar-link"><a href="{% url 'first_app:user_login' %}">login</a></li>
+            {% endif %}
+            <li class="navbar-link"><a href="{% url 'first_app:cbv_index' %}">Class Based View</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    {% block body_block %}
+
+    {% endblock %}
+</div>
+</body>
+</html>

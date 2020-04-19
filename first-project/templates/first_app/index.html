@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% extends 'first_app/base.html' %}
+{% block body_block %}
+    {% load static %}
+    <h1>Hello, this is index.html</h1>
+    {{ insert_me_variable|cut:'from' }}
+    <img src="{% static "images/a.JPG" %}" alt="not found">
+    <h1>Here we are trying to learn relative URL</h1>
+    <a href="{% url 'first_app:register_web_pages' %}"> go to register web page</a>
+    <a href="{% url 'first_app:form_pages' %}"> go to form page</a>
+    <a href="{% url 'first_app:web_pages' %}"> go to web page list</a>
+    <a href="{% url 'admin:index' %}"> go to admin page</a>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "first_app/first_app_base.html" %}
+
+
+{% block body_block %}
+    <div class="jumbotron">
+        <h1>Welcome to School Detail Page!</h1>
+        <h2>School details:</h2>
+        <p>Name: {{ school_detail.name }}</p>
+        <p>Principal: {{ school_detail.principal }}</p>
+        <p>Location: {{ school_detail.location }}</p>
+
+
+        <h1>The list of students who study in this school</h1>
+        <h3>students is the related name that we set in the advanced_model.py file when we defined the foreign key</h3>
+        {% for student in school_detail.students.all %}
+
+            <p>{{ student.name }} who is {{ student.age }} years old.</p>
+
+        {% endfor %}
+
+        <div class="container">
+            <p>
+                <a class="btn btn-warning" href="{% url 'first_app:update' pk=school_detail.pk %}"> Update
+                    Information </a>
+            </p>
+            <p>
+                <a class="btn btn-danger" href="{% url 'first_app:delete' pk=school_detail.pk %}"> Delete </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
