@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from news.models import Article
+from news.models import Article, Journalist
 
 from django.utils.timesince import timesince
 from datetime import datetime
@@ -57,6 +57,12 @@ of the fields
 """
 
 
+class JournalistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Journalist
+        fields = "__all__"
+
+
 class ArticleSerializer(serializers.ModelSerializer):
     # you can also define some fields added to the model's fields
     # 1: define the field you want to add to the fields
@@ -65,7 +71,10 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     # by default the primary key of the author would return, in the next line we
     # return the author's name and family instead
-    author = serializers.StringRelatedField()
+    # author = serializers.StringRelatedField()
+
+    # to show all data related to the journalist, we implement the JournalistSerializer
+    author = JournalistSerializer()
 
     class Meta:
         # 1: specify the model which wants to serialize
