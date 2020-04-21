@@ -57,12 +57,6 @@ of the fields
 """
 
 
-class JournalistSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Journalist
-        fields = "__all__"
-
-
 class ArticleSerializer(serializers.ModelSerializer):
     # you can also define some fields added to the model's fields
     # 1: define the field you want to add to the fields
@@ -74,7 +68,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     # author = serializers.StringRelatedField()
 
     # to show all data related to the journalist, we implement the JournalistSerializer
-    author = JournalistSerializer()
+    # author = JournalistSerializer(read_only=True)
 
     class Meta:
         # 1: specify the model which wants to serialize
@@ -102,3 +96,11 @@ class ArticleSerializer(serializers.ModelSerializer):
         if len(value) < 20:
             raise serializers.ValidationError("The title must include at least 20 characters")
         return value
+
+
+class JournalistSerializer(serializers.ModelSerializer):
+    articles = ArticleSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Journalist
+        fields = "__all__"
