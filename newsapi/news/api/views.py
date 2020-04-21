@@ -10,8 +10,10 @@ from news.api.serializers import ArticleSerializer, JournalistSerializer
 
 class JournalistListCreateAPIView(APIView):
     def get(self, request):
-        journalist = Journalist.objects.filter(active=True)
-        serializer = JournalistSerializer(journalist, many=True)
+        journalist = Journalist.objects.all()
+        serializer = JournalistSerializer(journalist,
+                                          many=True,
+                                          context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
