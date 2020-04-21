@@ -63,6 +63,10 @@ class ArticleSerializer(serializers.ModelSerializer):
     # 2: define the get_name_of_ne_field() method
     time_since_publication = serializers.SerializerMethodField()
 
+    # by default the primary key of the author would return, in the next line we
+    # return the author's name and family instead
+    author = serializers.StringRelatedField()
+
     class Meta:
         # 1: specify the model which wants to serialize
         model = Article
