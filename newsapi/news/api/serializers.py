@@ -77,3 +77,15 @@ class ArticleSerializer(serializers.ModelSerializer):
         now = datetime.now()
         t_delta = timesince(p_date, now)
         return t_delta
+
+    def validate(self, data):
+        """This function is a global validator for all of the parameters"""
+        if data["title"] == data["description"]:
+            raise serializers.ValidationError("Title and Description must be different from each other!")
+        return data
+
+    def validate_title(self, value):
+        """This function is a validator just for title field"""
+        if len(value) < 20:
+            raise serializers.ValidationError("The title must include at least 20 characters")
+        return value
