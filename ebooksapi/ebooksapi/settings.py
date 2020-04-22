@@ -128,3 +128,12 @@ STATIC_URL = '/static/'
 # most of times, the global permission setting does not satisfy all cases
 # so we can define the specific permission policy for each view, as the result, we commented the
 # above dictionary
+
+# global pagination settings
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 3
+# }
+# most of times, the global pagination setting does not satisfy all cases
+# so we can define the specific pagination policy for each view, as the result, we commented the
+# above dictionary
