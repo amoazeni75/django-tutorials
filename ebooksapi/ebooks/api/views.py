@@ -5,7 +5,7 @@ from ebooks.models import Ebook, Review
 from ebooks.api.serializers import EbookSerializer, ReviewSerializer
 
 from rest_framework import permissions
-from ebooks.api.permissions import IsAdminUserOrReadOnly
+from ebooks.api.permissions import IsAdminUserOrReadOnly, IsReviewAuthorOrReadOnly
 
 from rest_framework.exceptions import ValidationError
 
@@ -68,3 +68,4 @@ class ReviewCreateAPIView(generics.CreateAPIView):
 class ReviewDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = [IsReviewAuthorOrReadOnly]

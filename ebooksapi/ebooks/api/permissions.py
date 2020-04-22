@@ -6,3 +6,10 @@ class IsAdminUserOrReadOnly(permissions.IsAdminUser):
         is_admin = super().has_permission(request, view)
         return request.method in permissions.SAFE_METHODS or is_admin
         # in the above we check the user is admin or the requested method is safe or not
+
+
+class IsReviewAuthorOrReadOnly(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return obj.review_author == request.user
