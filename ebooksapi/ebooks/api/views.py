@@ -9,6 +9,8 @@ from ebooks.api.permissions import IsAdminUserOrReadOnly, IsReviewAuthorOrReadOn
 
 from rest_framework.exceptions import ValidationError
 
+from ebooks.api.pagination import SmallSizePagination
+
 """
 In the following class we need to implement get, post method 
 """
@@ -36,6 +38,7 @@ class EookListCreateAPIViewAdvanced(generics.ListCreateAPIView):
     queryset = Ebook.objects.all()
     serializer_class = EbookSerializer
     permission_classes = [IsAdminUserOrReadOnly]  # we implemented the class in the permissions.py
+    pagination_class = SmallSizePagination
 
 
 class EbookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
