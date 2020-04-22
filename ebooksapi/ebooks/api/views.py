@@ -5,6 +5,7 @@ from ebooks.models import Ebook, Review
 from ebooks.api.serializers import EbookSerializer, ReviewSerializer
 
 from rest_framework import permissions
+from ebooks.api.permissions import IsAdminUserOrReadOnly
 
 """
 In the following class we need to implement get, post method 
@@ -32,13 +33,13 @@ The following classes is same as the above class, but it has more ready-to-use c
 class EookListCreateAPIViewAdvanced(generics.ListCreateAPIView):
     queryset = Ebook.objects.all()
     serializer_class = EbookSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUserOrReadOnly]  # we implemented the class in the permissions.py
 
 
 class EbookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ebook.objects.all()
     serializer_class = EbookSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUserOrReadOnly]
 
 
 class ReviewCreateAPIView(generics.CreateAPIView):
