@@ -7,6 +7,8 @@ from ebooks.api.serializers import EbookSerializer, ReviewSerializer
 from rest_framework import permissions
 from ebooks.api.permissions import IsAdminUserOrReadOnly
 
+from rest_framework.exceptions import ValidationError
+
 """
 In the following class we need to implement get, post method 
 """
@@ -45,7 +47,7 @@ class EbookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 class ReviewCreateAPIView(generics.CreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     """
     we must override the following method, because it is for a general usage
     and we need to specify the ebook foreign key before serializer.save()
@@ -54,7 +56,13 @@ class ReviewCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer):
         ebook_pk = self.kwargs["ebook_pk"]
         ebook = get_object_or_404(Ebook, pk=ebook_pk)
-        serializer.save(ebook=ebook)
+        review_author = self.request.user
+
+        review_queryset = Review.objects.filter(ebook=ebook, review_author=review_author)
+        if review_queryset.exists():
+            raise ValidationError("Each user can only review once for each book")
+
+        serializer.save(ebook=ebook, review_author=review_author)
 
 
 class ReviewDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
