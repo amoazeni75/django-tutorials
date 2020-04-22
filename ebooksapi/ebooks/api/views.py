@@ -35,7 +35,8 @@ The following classes is same as the above class, but it has more ready-to-use c
 
 
 class EookListCreateAPIViewAdvanced(generics.ListCreateAPIView):
-    queryset = Ebook.objects.all()
+    queryset = Ebook.objects.all().order_by(
+        "-id")  # we added the order by to avoid problems that may happen in pagination
     serializer_class = EbookSerializer
     permission_classes = [IsAdminUserOrReadOnly]  # we implemented the class in the permissions.py
     pagination_class = SmallSizePagination
