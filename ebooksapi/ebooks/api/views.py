@@ -4,6 +4,8 @@ from rest_framework.generics import get_object_or_404
 from ebooks.models import Ebook, Review
 from ebooks.api.serializers import EbookSerializer, ReviewSerializer
 
+from rest_framework import permissions
+
 """
 In the following class we need to implement get, post method 
 """
@@ -30,11 +32,13 @@ The following classes is same as the above class, but it has more ready-to-use c
 class EookListCreateAPIViewAdvanced(generics.ListCreateAPIView):
     queryset = Ebook.objects.all()
     serializer_class = EbookSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class EbookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ebook.objects.all()
     serializer_class = EbookSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class ReviewCreateAPIView(generics.CreateAPIView):

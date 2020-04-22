@@ -116,8 +116,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
-}
+# by adding the following code
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         # 'rest_framework.permissions.IsAuthenticated',  # as default all api endpoints needs authentication
+#         'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # as default all api endpoints needs authentication
+#         # for any changes, just public can see not update
+#     )
+# }
+
+# most of times, the global permission setting does not satisfy all cases
+# so we can define the specific permission policy for each view, as the result, we commented the
+# above dictionary
