@@ -3,8 +3,11 @@
 <img src="https://github.com/amoazeni75/django-tutorials/blob/master/1.png">
 <img src="https://github.com/amoazeni75/django-tutorials/blob/master/2.png">
 
-<p>What you learn in the profilesapi</p>
-<ul>
+<h3>What you learn in the profilesapi</h3>
+<ol>
   <li>Token based authentication</li>
   <li>Login and Register via API based on Token</li>
-</ul>
+  <li>Viewsets and Routers</li>
+  <li>The Filtering System</li>
+  <li>Automated Testing of REST API</li>
+</ol>
