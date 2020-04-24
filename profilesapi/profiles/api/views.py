@@ -40,9 +40,15 @@ class ProfileViewSet(mixins.UpdateModelMixin,
 
 # with ModelViewSet can create, read, update, and delete (CRUD) an instance of a model
 class ProfileStatusViewSet(ModelViewSet):
-    queryset = ProfileStatus.objects.all()
     serializer_class = ProfileStatusSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        queryset = ProfileStatus.objects.all()
+        username = self.request.query_params.get("username", None)
+        if username is not None:
+            queryset = queryset.filter(user_profile__user__username=username)
+        return queryset
 
     # to connect automatically the new profile status to the profile of the user making request
     # we have to override the perform_create method

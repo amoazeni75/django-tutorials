@@ -7,7 +7,7 @@ profile_detail = ProfileViewSet.as_view({"get": "retrieve"})
 
 router = DefaultRouter()
 router.register(r"profiles", ProfileViewSet)
-router.register(r"status", ProfileStatusViewSet)
+router.register(r"status", ProfileStatusViewSet, basename='status')  # because we override the get_queryset method
 
 urlpatterns = [
     # path('profiles/', ProfileList.as_view(), name='profiles-list'),
