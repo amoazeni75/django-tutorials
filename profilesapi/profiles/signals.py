@@ -8,6 +8,6 @@ from profiles.models import Profile
 # and create an user_profile instance
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
-    print("Created: ", created)
+    # print("Created: ", created)
     if created:
         Profile.objects.create(user=instance)

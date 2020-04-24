@@ -10,6 +10,8 @@ from rest_framework import mixins
 
 from profiles.api.permissions import IsOwnProfileOrReadOnly, IsOwnerOrReadOnly
 
+from rest_framework.filters import SearchFilter
+
 
 # viewsets class combine both ListView class and DetailView class in one class
 
@@ -37,8 +39,16 @@ class ProfileViewSet(mixins.UpdateModelMixin,
     serializer_class = ProfileSerializer
     permission_classes = [IsAuthenticated, IsOwnProfileOrReadOnly]
 
+    # to filter the profiles with fields
+    filter_backends = [SearchFilter]
+    search_fields = ["city"]  # http://127.0.0.1:8000/api/profiles/?search=tehran
+    # it also handles the partial search fields, for example if enter "teh" it also return
+    # the result same as the above url test
+
 
 # with ModelViewSet can create, read, update, and delete (CRUD) an instance of a model
+
+
 class ProfileStatusViewSet(ModelViewSet):
     serializer_class = ProfileStatusSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
@@ -48,6 +58,7 @@ class ProfileStatusViewSet(ModelViewSet):
         username = self.request.query_params.get("username", None)
         if username is not None:
             queryset = queryset.filter(user_profile__user__username=username)
+            # http://127.0.0.1:8000/api/status/?username=admin
         return queryset
 
     # to connect automatically the new profile status to the profile of the user making request
