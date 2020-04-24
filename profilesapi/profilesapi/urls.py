@@ -24,4 +24,5 @@ urlpatterns = [
                   path("api/", include("profiles.api.urls")),
                   path("api-auth/", include("rest_framework.urls")),  # for browsable  api
                   path("api/rest-auth/", include("rest_auth.urls")),  # for ajax client
+                  path("api/rest-auth/registration/", include("rest_auth.registration.urls")),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

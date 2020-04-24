@@ -35,10 +35,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
     'profiles.apps.ProfilesConfig',
+
     'rest_framework',
+
     'rest_framework.authtoken',  # after adding this app, need migration
+
     'rest_auth',
+    'rest_auth.registration',
+
+    'allauth',  # after adding this app, need migration
+    'allauth.account',
+    'allauth.socialaccount',  # users can login and register via social accounts like facebook
 ]
 
 MIDDLEWARE = [
@@ -128,3 +138,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_REQUIRED = (True)
