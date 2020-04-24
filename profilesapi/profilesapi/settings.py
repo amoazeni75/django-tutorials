@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profiles.apps.ProfilesConfig',
     'rest_framework',
-    'rest_framework.authtoken', # after adding this app, need migration
+    'rest_framework.authtoken',  # after adding this app, need migration
+    'rest_auth',
 ]
 
 MIDDLEWARE = [
