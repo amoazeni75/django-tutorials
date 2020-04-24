@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
+                  path("api/", include("profiles.api.urls")),
                   path("api-auth/", include("rest_framework.urls")),  # for browsable  api
                   path("api/rest-auth/", include("rest_auth.urls")),  # for ajax client
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
