@@ -37,8 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
 
+    'django.contrib.sites',
+
     'rest_framework',
     'rest_framework.authtoken',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'rest_auth',
+    'rest_auth.registration',
+
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -118,4 +129,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# for using custom user model
 AUTH_USER_MODEL = "users.CustomUser"
+
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# django.contrib.sites
+SITE_ID = 1
+
+# to be able register via API, django-allauth
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_REQUIRED = (True)
