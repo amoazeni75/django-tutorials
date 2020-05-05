@@ -1,18 +1,17 @@
 from rest_framework import serializers
-from questions.models import Answers, Question
+from questions.models import Answer, Question
 
 
 class AnswerSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)  # to have string representation of author
-    created_at = serializers.SerializerMethodField(read_only=True)  # this kind of fields is
+    created_at = serializers.SerializerMethodField()  # this kind of fields is
     # for the cases we want to operate some staff before returning the value
-    likes_count = serializers.SerializerMethodField(read_only=True)
-    user_has_voted = serializers.SerializerMethodField(
-        read_only=True)  # to understand the request.user has voted or not
+    likes_count = serializers.SerializerMethodField()
+    user_has_voted = serializers.SerializerMethodField()  # to understand the request.user has voted or not
 
     class Meta:
-        model = Answers
-        exclude = ["updated_at", "voters", "question"]
+        model = Answer
+        exclude = ["question", "voters", "updated_at"]
 
     def get_created_at(self, instance):
         # to customize the way that the time wants look like
@@ -23,15 +22,15 @@ class AnswerSerializer(serializers.ModelSerializer):
 
     def get_user_has_voted(self, instance):
         request = self.context.get("request")
-        return instance.voters.filter(pk=request.user.pk).exist()
+        return instance.voters.filter(pk=request.user.pk).exists()
 
 
 class QuestionSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)  # to have string representation of author
-    created_at = serializers.SerializerMethodField(read_only=True)  # this kind of fields is
+    created_at = serializers.SerializerMethodField()  # this kind of fields is
     slug = serializers.SlugField(read_only=True)
-    answers_count = serializers.SerializerMethodField(read_only=True)
-    user_has_answered = serializers.SerializerMethodField(read_only=True)
+    answers_count = serializers.SerializerMethodField()
+    user_has_answered = serializers.SerializerMethodField()
 
     class Meta:
         model = Question
@@ -39,11 +38,11 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     def get_created_at(self, instance):
         # to customize the way that the time wants look like
-        return isinstance.created_at.strftime("%B %d %Y")  # name of the month-day-year
+        return instance.created_at.strftime("%B %d %Y")  # name of the month-day-year
 
     def get_answers_count(self, instance):
         return instance.answers.count()
 
     def get_user_has_answered(self, instance):
         request = self.context.get("request")
-        return instance.answers.filter(author=request.user).exist()
+        return instance.answers.filter(author=request.user).exists()
