@@ -15,7 +15,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
     def get_created_at(self, instance):
         # to customize the way that the time wants look like
-        return isinstance.created_at.strftime("%B %d %Y")  # name of the month-day-year
+        return instance.created_at.strftime("%B %d, %Y")  # name of the month-day-year
 
     def get_likes_count(self, instance):
         return instance.voters.count()
@@ -38,7 +38,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     def get_created_at(self, instance):
         # to customize the way that the time wants look like
-        return instance.created_at.strftime("%B %d %Y")  # name of the month-day-year
+        return instance.created_at.strftime("%B %d, %Y")  # name of the month-day-year
 
     def get_answers_count(self, instance):
         return instance.answers.count()
