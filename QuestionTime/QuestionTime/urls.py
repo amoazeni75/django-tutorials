@@ -33,7 +33,7 @@ urlpatterns = [
          RegistrationView.as_view(
              form_class=CustomUserForm,
              success_url="/",
-         ), name='django_registration.register'),
+         ), name='django_registration_register'),
 
     path("accounts/",
          include("django_registration.backends.one_step.urls")),
