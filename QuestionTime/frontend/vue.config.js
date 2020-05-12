@@ -15,7 +15,7 @@ module.exports = {
             .filename('bundle.js')
 
         config.optimization
-            .splitChunks(false)
+        	.splitChunks(false)
 
         config.resolve.alias
             .set('__STATIC__', 'static')
