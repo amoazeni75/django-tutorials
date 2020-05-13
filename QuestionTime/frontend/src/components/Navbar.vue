@@ -19,10 +19,10 @@
                     </li>
                     <li class="nav-item mx-1">
                         <router-link
-                                :to="{name : 'About'}"
+                                :to="{name : 'Home'}"
                                 class="btn btn-sm btn-danger"
                         >
-                            About
+                            Add Question
                         </router-link>
                     </li>
                     <li class="nav-item">
