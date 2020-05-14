@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class QuestionViewSet(viewsets.ModelViewSet):  # provide CRUD functionality
-    queryset = Question.objects.all()
+    queryset = Question.objects.all().order_by("-created_at")
     lookup_field = "slug"
     serializer_class = QuestionSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
