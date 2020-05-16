@@ -7,11 +7,22 @@
 
 <script>
     import NavbarComponent from "./components/Navbar"
+    import {apiService} from "../common/api.service"
 
     export default {
         name: "App",
         components: {
             NavbarComponent
+        },
+        methods: {
+            async getUserInfo() {
+                const data = await apiService("/api/user/")
+                const requestUser = data["username"]
+                window.localStorage.setItem("username", requestUser)
+            }
+        },
+        created() {
+            this.getUserInfo()
         }
     }
 </script>

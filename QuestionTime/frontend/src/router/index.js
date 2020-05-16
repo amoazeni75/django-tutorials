@@ -1,8 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Question from "../components/Question.vue";
-import QuestionEditor from "../components/QuestionEditor";
+import Question from "../views/Question.vue";
+import QuestionEditor from "../views/QuestionEditor";
 
 Vue.use(VueRouter);
 
