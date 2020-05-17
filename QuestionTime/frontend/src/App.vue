@@ -7,7 +7,7 @@
 
 <script>
     import NavbarComponent from "./components/Navbar"
-    import {apiService} from "../common/api.service"
+    import {apiService} from "./common/api.service"
 
     export default {
         name: "App",

@@ -8,6 +8,7 @@ class AnswerSerializer(serializers.ModelSerializer):
     # for the cases we want to operate some staff before returning the value
     likes_count = serializers.SerializerMethodField()
     user_has_voted = serializers.SerializerMethodField()  # to understand the request.user has voted or not
+    question_slug = serializers.SerializerMethodField()
 
     class Meta:
         model = Answer
@@ -23,6 +24,9 @@ class AnswerSerializer(serializers.ModelSerializer):
     def get_user_has_voted(self, instance):
         request = self.context.get("request")
         return instance.voters.filter(pk=request.user.pk).exists()
+
+    def get_question_slug(self, instance):
+        return instance.question.slug
 
 
 class QuestionSerializer(serializers.ModelSerializer):
