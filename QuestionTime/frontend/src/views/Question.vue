@@ -2,6 +2,10 @@
     <div class="single-question mt-2">
         <div class="container">
             <h1>{{question.content}}</h1>
+            <QuestionActions
+                    v-if="isQuestionAuthor"
+                    :slug="question.slug"
+            />
             <p class="mb-0">Posted by:
                 <span class="author-name">{{question.author}} </span>
             </p>
@@ -38,10 +42,10 @@
             <hr>
         </div>
         <div class="container">
-            <AnswerComponent v-for="(answer, index) in answers"
+            <AnswerComponent v-for="answer in answers"
                              :answer="answer"
                              :requestUser="requestUser"
-                             :key="index"
+                             :key="answer.id"
                              @delete-answer="deleteAnswer"
             />
             <div class="my-4">
@@ -60,6 +64,7 @@
 <script>
     import {apiService} from "../common/api.service";
     import AnswerComponent from "../components/Answer.vue";
+    import QuestionActions from "../components/QuestionActions";
 
     export default {
         name: "Question",
@@ -70,6 +75,7 @@
             }
         },
         components: {
+            QuestionActions,
             AnswerComponent
         },
         data() {
@@ -83,6 +89,11 @@
                 next: null,
                 loadingAnswers: false,
                 requestUser: null
+            }
+        },
+        computed: {
+            isQuestionAuthor() {
+                return this.question.author === this.requestUser
             }
         },
         methods: {

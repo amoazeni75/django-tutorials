@@ -26,12 +26,19 @@
 
     export default {
         name: "QuestionEditor",
+        props: {
+            slug: {
+                type: String,
+                required: false
+            }
+        },
         data() {
             return {
                 question_body: null,
                 error: null
             }
-        },
+        }
+        ,
         methods: {
             onSubmit() {
                 if (!this.question_body) {
@@ -41,6 +48,10 @@
                 } else {
                     let endpoint = "/api/questions/"
                     let method = "POST"
+                    if (this.slug !== undefined) { //for updating the content of question
+                        endpoint += `${this.slug}/`;
+                        method = "PUT"
+                    }
                     apiService(endpoint, method, {content: this.question_body})
                         .then(value => {
                             this.$router.push(
@@ -51,6 +62,18 @@
                             )
                         })
                 }
+            }
+        }
+        ,
+        async beforeRouteEnter(to, from, next) {
+            if (to.params.slug !== undefined) {
+                let endpoint = `/api/questions/${to.params.slug}/`;
+                let data = await apiService(endpoint);
+                return next(vm => {
+                    vm.question_body = data.content
+                })
+            } else {
+                return next();
             }
         },
         created() {
