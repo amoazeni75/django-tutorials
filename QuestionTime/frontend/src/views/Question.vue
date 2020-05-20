@@ -1,5 +1,6 @@
 <template>
-    <div class="single-question mt-2">
+    <div class="single-question mt-2"
+         v-if="question">
         <div class="container">
             <h1>{{question.content}}</h1>
             <QuestionActions
@@ -59,12 +60,17 @@
             </div>
         </div>
     </div>
+    <PageNotFound
+            v-else
+            :message="'Question Not Found...'"
+    />
 </template>
 
 <script>
     import {apiService} from "../common/api.service";
     import AnswerComponent from "../components/Answer.vue";
     import QuestionActions from "../components/QuestionActions";
+    import PageNotFound from "./PageNotFound";
 
     export default {
         name: "Question",
@@ -76,7 +82,8 @@
         },
         components: {
             QuestionActions,
-            AnswerComponent
+            AnswerComponent,
+            PageNotFound
         },
         data() {
             return {
@@ -104,9 +111,15 @@
                 let endpoint = `/api/questions/${this.slug}/`;
                 apiService(endpoint)
                     .then(data => {
-                        this.question = data
-                        this.userHasAnswered = data.user_has_answered
-                        this.setPageTitle(data.content)
+                        if (data) {
+                            this.question = data
+                            this.userHasAnswered = data.user_has_answered
+                            this.setPageTitle(data.content)
+                            this.getQuestionAnswers();
+                        } else {
+                            this.question = null
+                            this.setPageTitle("Question Not Found")
+                        }
                     })
             },
             getQuestionAnswers() {
@@ -158,7 +171,6 @@
         },
         created() {
             this.getQuestionData();
-            this.getQuestionAnswers();
             this.setRequestUser();
         }
     }

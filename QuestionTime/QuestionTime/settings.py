@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ldz(q%0^56p-db=duq56ts#p#_q2tk_%r)5*bxcz8_*o3*(q6@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -135,6 +135,11 @@ LOGOUT_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "frontend/dist")
+]
+# STATIC_ROOT = "" # The absolute path to the directory where collecstatics will
 
 # for using custom user model
 AUTH_USER_MODEL = "users.CustomUser"
